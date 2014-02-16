@@ -13,14 +13,31 @@ body{font-family: 'Roboto', sans-serif; }
 	width: 800px;
 	height: 600px;
 	border: solid 1px;
-	text-align: center;
+	margin: 10px;
 	
-}
-.content {
-	margin: 5px;
-	border: solid 1px;
 }
 
 .title {
 	color: #5B585A;
+	text-align: center;
+	width: 98%;
+	margin: auto;
+	background-color: #DDE4B5;	
+
+}
+.ref-section{
+	margin-top: 10px;
+	float: right;
+	width: 35%;
+	margin-bottom: 10px;
+	border: solid 1px;
+	background-color: #DDE4B5;	
+}
+.graph-section{
+	margin-top: 10px;
+	width: 55%;
+	float: left;
+	margin-bottom: 10px;
+	border: solid 1px;
+	background-color: #DDE4B5;	
 }
