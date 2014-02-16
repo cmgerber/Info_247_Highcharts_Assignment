@@ -2,11 +2,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Company Sales Report</title>
-    <link rel="stylesheet" href="_css/main.css">
-    <script src="_js/jquery-1.11.0.min.js"></script>
-    <script src="_js/highcharts.js"></script>
-    <!--Add the script location in the header -->
-    <script src="_js/main.js"></script>
+    <link rel="stylesheet" href="_css/barChart.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="_js/barChart.js"></script>
 
 </head>
 <body>
@@ -14,24 +13,32 @@
   /*All script has been moved to main.js file.  */
   </script>
 
- <!--Define the main wrapper class -->
   <div id="wrapper">
 
-    <!--Define div for header, properties defined in css file -->
     <div id ="header">
-        <h2>8 Bar Chart</h2>
+        <h2>Departmental Spending Report</h2>
+    </div>
+
+    <div id="YTD-bar">
+
+        <div id="bar-chart">
+        </div>
+    </div>
+
+    <div class="ref-section1">
+        <div class="desc">Textual desc</div>
+        <div class="ytd-budget-ref">
+            here is small graph for ytd-budget per department - bar chart
+        </div>
     </div>
 
     <div id="multi-bar">
-        <!--Define div for line chart, properties defined in css file -->
         <div class="bar" id="bar-chart1">
         </div>
 
-        <!--Define div for bar chart, properties defined in css file -->
         <div class="bar" id="bar-chart2">
         </div>
 
-        <!--Define div for pir chart, properties defined in css file -->
         <div class="bar" id="bar-chart3">
         </div>
 
@@ -50,6 +57,10 @@
         <div class="bar" id="bar-chart8">
         </div>
     </div>
+    <div class="ref-section1">
+        <div class="desc">Textual desc</div>
+    </div>
+
   </div>
 
 </body>
