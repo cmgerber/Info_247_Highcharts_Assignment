@@ -108,17 +108,24 @@ $(document).ready(function(){
 		series: []
 	}
 
-//draw YTD line chart
+//draw YTD Bar chart
 	var option_ytdBarChart ={
 		chart: {
 			renderTo: "ytd-budget-ref",
 			type: "column"
 		},
 		title: {
-			text: "Nov YTD Budget per Department ",
+			text: "YTD Budget Size vs Actual ",
 			x: 25, //set it to center
 			style: {
 				fontSize: '14px'
+			}
+		},
+		subtitle: {
+			text: "using projected actual for Nov",
+			x: 25,
+			style: {
+				fontSize: '12px'
 			}
 		},
 		xAxis: {
@@ -149,13 +156,14 @@ $(document).ready(function(){
 		legend: {
 			layout: "vertical",
 			align: "right",
-			verticalAlign: "top",
+			verticalAlign: "middle",
 			itemStyle: {
 				fontSize: '8px'
 			},
 			itemMarginTop: 5,
 			floating: true,
-			enabled: false,
+			// y: 40,
+			// enabled: false,
 		},
 		series: []
 	}
@@ -264,7 +272,17 @@ $(document).ready(function(){
 	$.get("_data/ytd_nov_budget.csv", function(data){
 		var lines = data.split("\r");
 		
-		department_data = {name: "Nov Budget", data:[]};
+		budget = {
+			type: "column", 
+			name: "Budget", 
+			data:[]
+		};
+		actual = {
+			type: "scatter", 
+			color: 'red', 
+			name: "Actual", 
+			data:[]
+		};
 		$.each(lines, function(lineNo, line){
 			// console.log(lineNo, line);
 			items = line.split(",");
@@ -285,13 +303,17 @@ $(document).ready(function(){
 						}
 						option_ytdBarChart.xAxis.categories.push(department_name);
 					}
+					else if (itemNo ==1) {
+						budget.data.push(parseInt(item));
+					}
 					else{
-						department_data.data.push(parseInt(item));
+						actual.data.push(parseInt(item));
 					}
 				});
 			});
-			console.log(department_data);
-				option_ytdBarChart.series.push(department_data);
+
+			option_ytdBarChart.series.push(budget);
+			option_ytdBarChart.series.push(actual);
 
 		var chart = new Highcharts.Chart(option_ytdBarChart);
 	}); //end .get ytd_nov_budget.csv
