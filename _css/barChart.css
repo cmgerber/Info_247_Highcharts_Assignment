@@ -84,11 +84,10 @@ body{font-family: 'Roboto', sans-serif; }
     margin:auto;
     background-color:#DDE4B5;
     color:#5B585A;
-    font-size:36px;
+    font-size:32px;
     text-align:center;
-    height:10%;
+    height:7%;
 }
-
 
 
 
@@ -108,13 +107,24 @@ body{font-family: 'Roboto', sans-serif; }
 }
 
 #multi-bar {
-    height: 45%;
+    height: 50%;
     margin: auto;
 
 }
 
+#bar-section1 {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#bar-section2 {
+    float: right;
+    width: 50%;
+    height: 100%;
+}
+
 .bar
 {
-    height:30%;
-    width: 60%;
+    height:25%;
 }

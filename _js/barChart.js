@@ -204,7 +204,7 @@ $(document).ready(function(){
 
     //multi bar chart
     var trellisbarcharts = [],
-        $containers = $('#multi-bar div'),
+        $containers = $('#multi-bar .bar'),
         datasets = [];
 
     
