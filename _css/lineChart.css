@@ -12,9 +12,9 @@ body{font-family: 'Roboto', sans-serif; }
 #container {
 	width: 800px;
 	height: 600px;
-	/*border: solid 1px;*/
+	border: solid 1px;
 	padding: 10px;
-	
+	border-color: #E3E3E3;
 }
 
 .title {
@@ -23,21 +23,32 @@ body{font-family: 'Roboto', sans-serif; }
 	width: 100%;
 	margin: auto;
 	background-color: #DDE4B5;	
-	font-size: 40px;
-
+	font-size: 36px;
+	height: 10%;
 }
-.ytd-budget-ref {
-	position: absolute;
-	top: 330px;
-	left: 410px;
-}
-.mon-graph {
-	position: absolute;
-	top: 330px;
-	left: 10px;
-}
-.ytd-graph {
-	position: absolute;
+#ytd-graph {
+	/*position: absolute;
 	top:50px;
-	left: 10px;
+	left: 10px;*/
+	height: 45%;
+	margin: auto;
 }
+#ytd-budget-ref {
+	/*position: absolute;
+	top: 330px;
+	left: 410px;*/
+	height: 40%;
+	width: 40%;
+	float: right;
+	margin-top: 10px;
+}
+#mon-graph {
+	/*position: absolute;
+	top: 330px;
+	left: 10px;*/
+	height: 40%;
+	width: 60%;
+	float: left;
+	margin-top: 10px;
+}
+

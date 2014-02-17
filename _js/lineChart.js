@@ -6,14 +6,14 @@ $(document).ready(function(){
 			renderTo: "mon-graph"
 		},
 		title: {
-			text: "Monthly Departmental Spending as % Increase over Budget",
+			text: "Monthly Department Spending as % Increase over Budget",
 			x: -10, //set it to center
 			style: {
 				fontSize: '14px'
 			}
 		},
 		subtitle: {
-			text: "using projected data for Nov",
+			text: "using projected actual for Nov",
 			x: -15,
 			style: {
 				fontSize: '12px'
@@ -24,9 +24,9 @@ $(document).ready(function(){
 		},
 		yAxis: {
 			title: {
-				text: "Percentage(%)",
+				text: "Percentage (%)",
 				style: {
-					fontSize: '9px',
+					fontSize: '10px',
 				}
 			},
 			plotLines: [{
@@ -46,7 +46,7 @@ $(document).ready(function(){
 			align: "right",
 			verticalAlign: "middle",
 			itemStyle: {
-				fontSize: '8px'
+				fontSize: '9px'
 			},
 			itemMarginTop: 5,
 			// floating: true,
@@ -54,8 +54,114 @@ $(document).ready(function(){
 		series: []
 	}
 
+	//draw YTD line chart
+	var option_ytdLineChart ={
+		chart: {
+			renderTo: "ytd-graph"
+		},
+		title: {
+			text: "YTD Department Spending as % Increase over Budget",
+			x: -10, //set it to center
+			style: {
+				fontSize: '14px'
+			}
+		},
+		subtitle: {
+			text: "using projected actual for Nov",
+			x: -15,
+			style: {
+				fontSize: '12px'
+			}
+		},
+		xAxis: {
+			categories: [] //place holder
+		},
+		yAxis: {
+			title: {
+				text: "Percentage(%)",
+				style: {
+					fontSize: '10px',
+				}
+			},
+			plotLines: [{
+				value: 0,
+				width: 2, 
+				color: "#191919",
+			}],
+			gridLineColor: "#ECECEA",
+			tickInterval: 10
+		},
+		tooltip: {
+			valueSuffix: "%",
+			valueDecimals: 1,
+		},
+		legend: {
+			layout: "vertical",
+			align: "right",
+			verticalAlign: "middle",
+			itemStyle: {
+				fontSize: '9px'
+			},
+			itemMarginTop: 5,
+			// floating: true,
+		},
+		series: []
+	}
+
+//draw YTD line chart
+	var option_ytdBarChart ={
+		chart: {
+			renderTo: "ytd-budget-ref",
+			type: "column"
+		},
+		title: {
+			text: "Nov YTD Budget per Department ",
+			x: 25, //set it to center
+			style: {
+				fontSize: '14px'
+			}
+		},
+		xAxis: {
+			categories: [], //place holder
+			labels: {
+				rotation: -45,
+			}
+		},
+		yAxis: {
+			title: {
+				text: "Budget ($)",
+				style: {
+					fontSize: '10px',
+				}
+			},
+			plotLines: [{
+				value: 0,
+				width: 1, 
+				color: "#191919",
+			}],
+			gridLineColor: "#ECECEA",
+			tickInterval: 1000
+		},
+		tooltip: {
+			valuePreffix: "$",
+			valueDecimals: 1,
+		},
+		legend: {
+			layout: "vertical",
+			align: "right",
+			verticalAlign: "top",
+			itemStyle: {
+				fontSize: '8px'
+			},
+			itemMarginTop: 5,
+			floating: true,
+			enabled: false,
+		},
+		series: []
+	}
+
+
 	// //initialize data variables
-	
 	$.get('_data/month_percent.csv', function(data){
 		var lines = data.split("\n");
 
@@ -105,64 +211,10 @@ $(document).ready(function(){
 		var chart = new Highcharts.Chart(option_monLineChart);
 	}); //end .get monthly chart
 
-	//draw YTD line chart
-	var option_ytdLineChart ={
-		chart: {
-			renderTo: "ytd-graph"
-		},
-		title: {
-			text: "YTD Departmental Spending as % Increase over Budget",
-			x: -10, //set it to center
-			style: {
-				fontSize: '14px'
-			}
-		},
-		subtitle: {
-			text: "using projected data for Nov",
-			x: -15,
-			style: {
-				fontSize: '12px'
-			}
-		},
-		xAxis: {
-			categories: [] //place holder
-		},
-		yAxis: {
-			title: {
-				text: "Percentage(%)",
-				style: {
-					fontSize: '9px',
-				}
-			},
-			plotLines: [{
-				value: 0,
-				width: 2, 
-				color: "#191919",
-			}],
-			gridLineColor: "#ECECEA",
-			tickInterval: 10
-		},
-		tooltip: {
-			valueSuffix: "%",
-			valueDecimals: 1,
-		},
-		legend: {
-			layout: "vertical",
-			align: "right",
-			verticalAlign: "middle",
-			itemStyle: {
-				fontSize: '8px'
-			},
-			itemMarginTop: 5,
-			// floating: true,
-		},
-		series: []
-	}
-
 	//get ytd line chart data
 	$.get("_data/ytd_percent_data.csv", function(data){
 		var lines = data.split("\r");
-		console.log(lines);
+		
 		$.each(lines, function(lineNo, line){
 			// console.log(lineNo, line);
 			items = line.split(",");
@@ -201,10 +253,46 @@ $(document).ready(function(){
 					data: department_data,
 					// color: series_color[lineNo-1]
 				});
-				console.log(option_ytdLineChart.series);
+				// console.log(option_ytdLineChart.series);
 			}
 		}); //end .each lines
 
 		var chart = new Highcharts.Chart(option_ytdLineChart);
 	}); //end .get ytd_percent.csv
+
+	//get ytd budget bar chart data
+	$.get("_data/ytd_nov_budget.csv", function(data){
+		var lines = data.split("\r");
+		
+		department_data = {name: "Nov Budget", data:[]};
+		$.each(lines, function(lineNo, line){
+			// console.log(lineNo, line);
+			items = line.split(",");
+				$.each(items, function(itemNo, item){
+					if (itemNo ==0){
+						switch(item){
+							case "Information Technology": 
+								department_name = "IT";
+								break;
+							case "Technical Support": 
+								department_name = "TS";
+								break;
+							case "Human Resources":
+								department_name = "HR";
+								break;
+							default:
+								department_name = item;
+						}
+						option_ytdBarChart.xAxis.categories.push(department_name);
+					}
+					else{
+						department_data.data.push(parseInt(item));
+					}
+				});
+			});
+			console.log(department_data);
+				option_ytdBarChart.series.push(department_data);
+
+		var chart = new Highcharts.Chart(option_ytdBarChart);
+	}); //end .get ytd_nov_budget.csv
 }); //end document.ready
