@@ -10,8 +10,8 @@ DDE4B5 221,228,181
 body{font-family: 'Roboto', sans-serif; }
 
 #container {
-	width: 800px;
-	height: 600px;
+	width: 600px;
+	height: 800px;
 	border: solid 1px;
 	margin: 10px;
 	
@@ -27,17 +27,26 @@ body{font-family: 'Roboto', sans-serif; }
 }
 .ref-section{
 	margin-top: 10px;
-	float: right;
-	width: 35%;
+
+	
 	margin-bottom: 10px;
 	border: solid 1px;
 	background-color: #DDE4B5;	
 }
+.desc {
+	width: 50%;
+}
+.ytd-budget-ref {
+	width: 50%;
+}
 .graph-section{
-	margin-top: 10px;
-	width: 55%;
-	float: left;
-	margin-bottom: 10px;
-	border: solid 1px;
+	margin: 10px, 5px, 10px, 5px;
+	/*border: solid 1px;*/
 	background-color: #DDE4B5;	
+}
+.mon-graph {
+	height: 50%;
+}
+.ytd-graph {
+	height: 50%;
 }
