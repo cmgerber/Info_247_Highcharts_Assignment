@@ -10,43 +10,34 @@ DDE4B5 221,228,181
 body{font-family: 'Roboto', sans-serif; }
 
 #container {
-	width: 600px;
-	height: 800px;
-	border: solid 1px;
-	margin: 10px;
+	width: 800px;
+	height: 600px;
+	/*border: solid 1px;*/
+	padding: 10px;
 	
 }
 
 .title {
 	color: #5B585A;
 	text-align: center;
-	width: 98%;
+	width: 100%;
 	margin: auto;
 	background-color: #DDE4B5;	
+	font-size: 40px;
 
-}
-.ref-section{
-	margin-top: 10px;
-
-	
-	margin-bottom: 10px;
-	border: solid 1px;
-	background-color: #DDE4B5;	
-}
-.desc {
-	width: 50%;
 }
 .ytd-budget-ref {
-	width: 50%;
-}
-.graph-section{
-	margin: 10px, 5px, 10px, 5px;
-	/*border: solid 1px;*/
-	background-color: #DDE4B5;	
+	position: absolute;
+	top: 330px;
+	left: 410px;
 }
 .mon-graph {
-	height: 50%;
+	position: absolute;
+	top: 330px;
+	left: 10px;
 }
 .ytd-graph {
-	height: 50%;
+	position: absolute;
+	top:50px;
+	left: 10px;
 }
