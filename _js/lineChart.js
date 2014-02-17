@@ -6,7 +6,7 @@ $(document).ready(function(){
 			renderTo: "mon-graph"
 		},
 		title: {
-			text: "Monthly Department Spending as % Increase over Budget",
+			text: "Monthly Difference between Actual Spending and Budget",
 			x: -10, //set it to center
 			style: {
 				fontSize: '14px'
@@ -60,7 +60,7 @@ $(document).ready(function(){
 			renderTo: "ytd-graph"
 		},
 		title: {
-			text: "YTD Department Spending as % Increase over Budget",
+			text: "YTD Difference between Actual Spending and Budget",
 			x: -10, //set it to center
 			style: {
 				fontSize: '14px'
