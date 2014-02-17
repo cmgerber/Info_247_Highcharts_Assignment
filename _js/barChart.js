@@ -7,17 +7,17 @@ $(document).ready(function(){
           type: 'column'
         },
         title: {
-          text: 'Year to Date Departmental Spending as % Increase over Budget',
+          text: 'YTD Difference Between Actual Spending and Budget',
           x: -10,
           style: {
-            fontSize: '14px'
+            fontSize: '12px'
           }
         },
         subtitle: {
             text: "using projected actual for Nov",
             x: -15,
             style: {
-                fontSize: '12px'
+                fontSize: '10px'
             }
         },
         xAxis: {
@@ -27,12 +27,14 @@ $(document).ready(function(){
             }
         },
         yAxis: {
-          title: {
-            text: 'Percentage (%)',
-            style: {
-                fontSize: '9px'
+            min: -300,
+            max: 350,
+            title: {
+                text: 'Percentage (%)',
+                style: {
+                    fontSize: '9px'
+                }
             }
-          }
         },
         credits: {
             enabled: false
@@ -67,14 +69,14 @@ $(document).ready(function(){
             text: "Nov YTD Budget per Department ",
             x: 25, //set it to center
             style: {
-                fontSize: '14px'
+                fontSize: '12px'
             }
         },
         subtitle: {
             text: "using projected actual for Nov",
             x: -15,
             style: {
-                fontSize: '12px'
+                fontSize: '10px'
             }
         },
         xAxis: {
@@ -101,6 +103,9 @@ $(document).ready(function(){
         tooltip: {
             valuePreffix: "$",
             valueDecimals: 1,
+        },
+        credits: {
+            enabled: false
         },
         legend: {
             layout: "vertical",
@@ -206,6 +211,7 @@ $(document).ready(function(){
     var trellisbarcharts = [],
         $containers = $('#multi-bar .bar'),
         datasets = [];
+        var newcolor = ['#7fc97f','#beaed4','#fdc086','#ffff99','#386cb0','#f0027f','#bf5b17','#666666']
 
     
     $.get("_data/month_percent.csv", function(data){
@@ -244,70 +250,76 @@ $(document).ready(function(){
                 datasets.push({
                     name: department_name,
                     data: department_data,
-                    // color: series_color[lineNo-1]
+                    color: newcolor[lineNo-1]
                 });
                 console.log(datasets);
             }
         }); //end .each lines
+
         $.each(datasets, function(i, dataset) {
-            trellisbarcharts.push(new Highcharts.Chart({
-                chart: {
-                    renderTo: $containers[i],
-                    type: 'column',
-                    marginBottom: i === 0 ? 100 : 10
-                },
-                title: {
-                    text: null
-                },
-                // title: {
-                //   text: 'Year to Date Departmental Spending as % Increase over Budget',
-                //   x: -10,
-                //   style: {
-                //     fontSize: '14px'
-                //   }
-                // },
-                // subtitle: {
-                //     text: "using projected actual for Nov",
-                //     x: -15,
-                //     style: {
-                //         fontSize: '12px'
-                //     }
-                // },
-                credits: {
-                    enabled: false
-                },
-
-                xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
-                    labels: {
-                        enabled: i === 0
-                    }
-                },
-
-                yAxis: {
-                    allowDecimals: false,
+                trellisbarcharts.push(new Highcharts.Chart({
+                    chart: {
+                        renderTo: $containers[i],
+                        type: 'column',
+                        marginBottom: i === 3 || i ===7 ? 20 : 10
+                    },
                     title: {
                         text: null
                     },
-                    min: -35,
-                    max: 55
-                },
-
-
-                legend: {
-                    layout: "vertical",
-                    align: "right",
-                    verticalAlign: "top",
-                    itemStyle: {
-                        fontSize: '8px'
+                    title: {
+                      text: i === 0 || i === 4 ? 'Monthly Difference Between Actual and Budget' : null,
+                      x: -10,
+                      style: {
+                        fontSize: '12px'
+                      },
                     },
-                    floating: true,
-                },
+                    subtitle: {
+                        text: i === 0 || i === 4 ? "using projected actual for Nov" : null,
+                        x: -15,
+                        style: {
+                            fontSize: '10px'
+                        },
+                    },
+                    credits: {
+                        enabled: false
+                    },
 
-                series: [dataset]
+                    xAxis: {
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                        labels: {
+                            enabled: i === 3 || i === 7 
+                        }
+                    },
 
-            }));
-        });
+                    yAxis: {
+                        allowDecimals: false,
+                        title: {
+                            text: null
+                        },
+                        // min: -35,
+                        // max: 55,
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#000000',
+                            zIndex: 5
+                        }]
+                    },
+
+                    legend: {
+                        layout: "vertical",
+                        align: "right",
+                        verticalAlign: "top",
+                        itemStyle: {
+                            fontSize: '8px'
+                        },
+                        // floating: true,
+                    },
+
+                    series: [dataset]
+
+                })); // end charts.push
+        }); // end .each datasets
     }); //end .get
     
 });
