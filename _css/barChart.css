@@ -76,24 +76,55 @@ body{font-family: 'Roboto', sans-serif; }
   height: 600px;
   width: 800px;
   border: solid 1px;
-  text-align: center;
-  margin:0 auto;
+  padding: 10px;
+  border-color: #E3E3E3;
 }
 #header{
-    width:98%;
+    width:100%;
     margin:auto;
-    background-color:black;
+    background-color:#DDE4B5;
     color:#5B585A;
-    font-size:40px;
+    font-size:32px;
     text-align:center;
-    height:10%;
-    padding:1%;
+    height:7%;
 }
 
+
+
+#ytd-budget-ref {
+    height: 40%;
+    width: 40%;
+    float: right;
+    margin-top: 10px;
+}
+
+#YTD-bar {
+    height: 40%;
+    width: 60%;
+    float: left;
+    margin-top: 10px;
+
+}
+
+#multi-bar {
+    height: 50%;
+    margin: auto;
+
+}
+
+#bar-section1 {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+#bar-section2 {
+    float: right;
+    width: 50%;
+    height: 100%;
+}
 
 .bar
 {
-    width:80%;
-    height:50%;
+    height:25%;
 }
-
