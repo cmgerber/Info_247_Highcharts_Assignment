@@ -115,7 +115,7 @@ $(document).ready(function(){
 			type: "column"
 		},
 		title: {
-			text: "YTD Budget Size vs Actual ",
+			text: "Nov YTD Budget vs Actual",
 			x: 25, //set it to center
 			style: {
 				fontSize: '14px'
@@ -147,7 +147,7 @@ $(document).ready(function(){
 				color: "#191919",
 			}],
 			gridLineColor: "#ECECEA",
-			tickInterval: 1000
+			tickInterval: 1000000
 		},
 		tooltip: {
 			valuePreffix: "$",
@@ -304,10 +304,12 @@ $(document).ready(function(){
 						option_ytdBarChart.xAxis.categories.push(department_name);
 					}
 					else if (itemNo ==1) {
-						budget.data.push(parseInt(item));
+						var val = parseInt(item) * 1000;
+						budget.data.push(val);
 					}
 					else{
-						actual.data.push(parseInt(item));
+						var val = parseInt(item) * 1000;
+						actual.data.push(val);
 					}
 				});
 			});
