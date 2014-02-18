@@ -27,8 +27,9 @@ $(document).ready(function(){
             }
         },
         yAxis: {
-            min: -300,
             max: 350,
+            min: -350,
+            tickInterval: 350,
             title: {
                 text: 'Percentage (%)',
                 style: {
@@ -66,17 +67,17 @@ $(document).ready(function(){
             type: "column"
         },
         title: {
-            text: "Nov YTD Budget per Department ",
+            text: "Nov YTD Budget vs Actual",
             x: 25, //set it to center
             style: {
-                fontSize: '12px'
+                fontSize: '14px'
             }
         },
         subtitle: {
             text: "using projected actual for Nov",
-            x: -15,
+            x: 25,
             style: {
-                fontSize: '10px'
+                fontSize: '12px'
             }
         },
         xAxis: {
@@ -98,25 +99,23 @@ $(document).ready(function(){
                 color: "#191919",
             }],
             gridLineColor: "#ECECEA",
-            tickInterval: 1000
+            tickInterval: 1000000
         },
         tooltip: {
             valuePreffix: "$",
             valueDecimals: 1,
         },
-        credits: {
-            enabled: false
-        },
         legend: {
             layout: "vertical",
             align: "right",
-            verticalAlign: "top",
+            verticalAlign: "middle",
             itemStyle: {
                 fontSize: '8px'
             },
             itemMarginTop: 5,
             floating: true,
-            enabled: false,
+            // y: 40,
+            // enabled: false,
         },
         series: []
     }
@@ -174,7 +173,17 @@ $(document).ready(function(){
     $.get("_data/ytd_nov_budget.csv", function(data){
         var lines = data.split("\r");
 
-        department_data = {name: "Nov Budget", data:[]};
+        budget = {
+            type: "column", 
+            name: "Budget", 
+            data:[]
+        };
+        actual = {
+            type: "scatter", 
+            color: 'red',
+            name: "Actual", 
+            data:[]
+        };
         $.each(lines, function(lineNo, line){
             // console.log(lineNo, line);
             items = line.split(",");
@@ -195,13 +204,19 @@ $(document).ready(function(){
                         }
                         option_ytdBarChart.xAxis.categories.push(department_name);
                     }
+                    else if (itemNo ==1) {
+                        var val = parseInt(item) * 1000;
+                        budget.data.push(val);
+                    }
                     else{
-                        department_data.data.push(parseInt(item));
+                        var val = parseInt(item) * 1000;
+                        actual.data.push(val);
                     }
                 });
             });
-            console.log(department_data);
-                option_ytdBarChart.series.push(department_data);
+
+            option_ytdBarChart.series.push(budget);
+            option_ytdBarChart.series.push(actual);
 
         var chart = new Highcharts.Chart(option_ytdBarChart);
     }); //end .get ytd_nov_budget.csv
@@ -294,7 +309,10 @@ $(document).ready(function(){
                     yAxis: {
                         allowDecimals: false,
                         title: {
-                            text: null
+                            text: i < 4 ? 'Percent (%)' : null,
+                            style: {
+                                fontSize: '9px'
+                            }
                         },
                         // min: -35,
                         // max: 55,
@@ -309,7 +327,7 @@ $(document).ready(function(){
                     legend: {
                         layout: "vertical",
                         align: "right",
-                        verticalAlign: "top",
+                        verticalAlign: "middle",
                         itemStyle: {
                             fontSize: '8px'
                         },

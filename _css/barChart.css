@@ -114,13 +114,13 @@ body{font-family: 'Roboto', sans-serif; }
 
 #bar-section1 {
     float: left;
-    width: 50%;
+    width: 52%;
     height: 100%;
 }
 
 #bar-section2 {
     float: right;
-    width: 50%;
+    width: 48%;
     height: 100%;
 }
 
